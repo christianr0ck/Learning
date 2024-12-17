@@ -153,3 +153,8 @@ form.addEventListener('submit', function (e) {
 function displayLogs() {
     logsContainer.innerHTML = `<p>Logs are saved to your GitHub repository!</p>`;
 }
+
+const githubUsername = 'christianr0ck'; 
+const repoName = 'Learning'; 
+const branch = 'main'; 
+const token = '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'; 
