@@ -158,3 +158,40 @@ const githubUsername = 'christianr0ck';
 const repoName = 'Learning'; 
 const branch = 'main'; 
 const token = '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'; 
+
+async function fetchLogsFromGitHub() {
+    const apiUrl = `https://api.github.com/repos/${githubUsername}/${repoName}/contents/logs`;
+
+    const response = await fetch(apiUrl, {
+        headers: {
+            'Authorization': `token ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+        }
+    });
+
+    const logsContainer = document.getElementById('logs');
+    logsContainer.innerHTML = ''; // Clear previous content
+
+    if (response.ok) {
+        const files = await response.json();
+
+        for (const file of files) {
+            const fileContent = await fetch(file.download_url);
+            const text = await fileContent.text();
+
+            // Display each log
+            const logDiv = document.createElement('div');
+            logDiv.classList.add('log');
+            logDiv.innerHTML = `
+                <p><strong>File:</strong> ${file.name}</p>
+                <pre>${text}</pre>
+            `;
+            logsContainer.appendChild(logDiv);
+        }
+    } else {
+        logsContainer.innerHTML = `<p>Error fetching logs. Please try again.</p>`;
+    }
+}
+
+// Fetch logs on page load
+window.onload = fetchLogsFromGitHub;
