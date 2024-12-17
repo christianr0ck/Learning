@@ -1,0 +1,26 @@
+async function saveToGitHub(content, fileName) {
+    const apiUrl = `https://api.github.com/repos/${githubUsername}/${repoName}/contents/${fileName}`;
+    const body = {
+        message: `Adding file: ${fileName}`,
+        content: btoa(content), // Encode content to Base64
+        branch: branch
+    };
+
+    const response = await fetch(apiUrl, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `token ${token}`,
+            'Accept': 'application/vnd.github.v3+json`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    });
+
+    if (response.ok) {
+        alert('Log saved successfully!');
+    } else {
+        const error = await response.json();
+        console.error('Error:', error);
+        alert('Failed to save log. Check console for details.');
+    }
+}
