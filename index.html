@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Learning Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Personal Learning Tracker</h1>
+        <form id="learning-form">
+            <input type="text" id="topic" placeholder="Topic" required>
+            <input type="date" id="date" required>
+            <textarea id="description" placeholder="What did you learn?" required></textarea>
+            <button type="submit">Add Entry</button>
+        </form>
+        <h2>Your Learning Logs</h2>
+        <input type="text" id="search" placeholder="Search logs...">
+        <div id="logs"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
